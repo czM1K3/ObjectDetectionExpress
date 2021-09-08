@@ -1,6 +1,7 @@
-FROM node:16-alpine
+FROM node:16-buster-slim
 
-RUN apk add --no-cache libc6-compat alpine-sdk
+RUN apt update
+RUN apt install build-essential -y
 
 WORKDIR /app
 COPY package.json yarn.lock ./
@@ -8,8 +9,8 @@ RUN yarn install --frozen-lockfile
 
 COPY . .
 
-RUN addgroup -g 1001 -S nodejs
-RUN adduser -S ai -u 1001
+RUN addgroup --gid 1002 nodejs
+RUN adduser --uid 1002 ai
 USER ai
 
 EXPOSE 3000
