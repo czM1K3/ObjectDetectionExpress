@@ -9,7 +9,7 @@ RUN yarn install --frozen-lockfile
 
 COPY . .
 
-RUN addgroup --gid 1002 nodejs
+RUN addgroup --gid 1001 nodejs
 RUN adduser --uid 1002 ai
 USER ai
 
