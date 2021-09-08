@@ -1,7 +1,12 @@
 FROM node:16-buster-slim
 
 RUN apt update
-RUN apt install build-essential -y
+RUN apt install -y build-essential \
+    wget \
+    python3 \
+    make \
+    gcc \ 
+    libc6-dev 
 
 WORKDIR /app
 COPY package.json yarn.lock ./
