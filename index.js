@@ -28,7 +28,10 @@ app.post("/", upload.single("image"), async (req, res) => {
 		formated[i] = {
 			type: labels[result[2][i]],
 			precision: result[1][i],
-			position: {
+			position: result[0][i].length > 2 ? {
+				x: result[0][i][0] + ((result[0][i][2] - result[0][i][0]) / 2),
+				y: result[0][i][1] + ((result[0][i][3] - result[0][i][1]) / 2),
+			} : {
 				x: result[0][i][0],
 				y: result[0][i][1],
 			},
