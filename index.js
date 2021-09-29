@@ -22,9 +22,7 @@ const port = 3000;
 
 app.post("/", upload.single("image"), async (req, res) => {
 	try {
-
 		const buffer = req.file.buffer;
-		console.log(model);
 		const result = await model.executeAsync(buffer);
 		const formated = Array(result[0].length);
 		for (let i = 0; i < formated.length; i++) {
