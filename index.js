@@ -41,9 +41,10 @@ app.post("/", upload.single("image"), async (req, res) => {
 		res.json(formated);
 	} catch (e) {
 		res.statusCode = 500;
-		res.write("Internal Server Error\n");
-		res.write(`Error: "${e.message}"`);
-		res.end();
+		res.json({
+			status: "Internal Server Error",
+			error: e.message,
+		});
 	}
 });
 
