@@ -39,7 +39,7 @@ app.post("/", upload.single("image"), async (req, res) => {
 				},
 			}
 		}
-		res.json({size: (sizes.reduce((a, b) => a + b, 0) / sizes.length), data: formated});
+		res.json({size: sizes.length > 0 ? (sizes.reduce((a, b) => a + b, 0) / sizes.length) : 0, data: formated});
 	} catch (e) {
 		res.statusCode = 500;
 		res.json({
