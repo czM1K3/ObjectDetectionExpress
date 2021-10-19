@@ -24,6 +24,7 @@ app.post("/", upload.single("image"), async (req, res) => {
 	try {
 		const buffer = req.file.buffer;
 		const result = await model.executeAsync(buffer);
+		const sizes = result[0].map(x => x.length > 2 ? (((x[2]-x[0])+(x[3]-x[1]))/2):null).filter(x => x);
 		const formated = Array(result[0].length);
 		for (let i = 0; i < formated.length; i++) {
 			formated[i] = {
@@ -38,7 +39,7 @@ app.post("/", upload.single("image"), async (req, res) => {
 				},
 			}
 		}
-		res.json(formated);
+		res.json({size: (sizes.reduce((a, b) => a + b, 0) / sizes.length), data: formated});
 	} catch (e) {
 		res.statusCode = 500;
 		res.json({
