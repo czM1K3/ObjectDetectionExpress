@@ -20,6 +20,10 @@ loadModel();
 const app = express();
 const port = 3000;
 
+app.get("/", (_req, res) => {
+	res.sendFile(`${__dirname}/index.html`)
+});
+
 app.post("/", upload.single("image"), async (req, res) => {
 	try {
 		const buffer = req.file.buffer;
